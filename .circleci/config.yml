@@ -11,7 +11,7 @@ jobs:
           name: Echo String Variables
           command: |
             echo "String Variable 1: $string_var1"
-            echo "String Variable 2: $string_var2"
+            echo "String Variable 2: $string_var1"
 
 workflows:
   version: 2
