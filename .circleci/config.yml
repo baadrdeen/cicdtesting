@@ -1,0 +1,27 @@
+version: 2.1
+
+jobs:
+  echo_strings_job:
+    docker:
+      - image: circleci/python:3.8
+
+    steps:
+      - run:
+          name: Echo String Variables
+          command: |
+            echo "String Variable 1: $string_var1"
+            echo "String Variable 2: $string_var2"
+
+workflows:
+  version: 2
+  echo_strings_workflow:
+    jobs:
+      - echo_strings_job:
+          context: my-context
+          filters:
+            branches:
+              only:
+                - main
+      - final_stage:
+          requires:
+            - echo_strings_job
