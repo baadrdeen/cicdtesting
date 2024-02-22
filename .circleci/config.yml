@@ -1,4 +1,5 @@
 version: 2.1
+
 jobs:
   echo_strings_job:
     docker:
@@ -21,6 +22,3 @@ workflows:
             branches:
               only:
                 - main
-      - final_stage:
-          requires:
-            - echo_strings_job
