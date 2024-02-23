@@ -1,21 +1,38 @@
-version: 2.1
+# Version 2.1 configuration file
 
-commands: # a reusable command with parameters
+# Define reusable commands with parameters
+commands:
+  # Command for greeting
   greeting:
+    # Define parameters for the command
     parameters:
+      # Parameter 'to' with a default value of "world" and type string
       to:
         default: "world"
         type: string
+    # Steps to execute when the command is called
     steps:
+      # Step to echo a greeting message with the provided parameter 'to'
       - run: echo "Hello <<parameters.to>>"
+
+# Define jobs to be executed
 jobs:
+  # Job named 'my-job'
   my-job:
+    # Specify Docker image for the job
     docker:
       - image: cimg/base:stable
+    # Steps to execute in the job
     steps:
+      # Execute the 'greeting' command with a specific parameter value
       - greeting:
-          to: "Chris"
+          to: "My-Name"
+
+# Define workflows to orchestrate job execution
 workflows:
+  # Workflow named 'my-workflow'
   my-workflow:
+    # List of jobs to be executed as part of the workflow
     jobs:
+      # Include the 'my-job' in this workflow
       - my-job
