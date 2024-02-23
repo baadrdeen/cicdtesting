@@ -1,25 +1,28 @@
 version: 2.1
 
 
-jobs:
-  echo_strings_job:
-    docker:
-      - image: cimg/python:3.12.1
-
+commands: # a reusable command with parameters
+  greeting:
+    parameters:
+      msg:
+        default: "world"
+        type: string
+      name:
+        default: "Anymous"
+        type: string
     steps:
-      - run:
-          name: Echo String Variables
-          command: |
-            echo "String Variable 1: $string_var1"
-            echo "String Variable 2: $string_var2"
-
+      - run: echo "Hello <<parameters.msg>>"
+      - run: echo "My name is <<parameters.name>>"
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - greeting:
+          msg: "My-Name"
 workflows:
-  version: 2
-  echo_strings_workflow:
+  my-workflow:
     jobs:
-      - echo_strings_job:
-          context: my-context
-          filters:
-            branches:
-              only:
-                - main
+      - my-job
+
+
