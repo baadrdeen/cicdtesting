@@ -3,7 +3,7 @@
 # Define reusable commands with parameters
 commands:
   # Command for greeting
-  greeting:
+  print:
     # Define parameters for the command
     parameters:
       # Parameter 'to' with a default value of "world" and type string
@@ -25,7 +25,7 @@ jobs:
     # Steps to execute in the job
     steps:
       # Execute the 'greeting' command with a specific parameter value
-      - greeting:
+      - print:
           to: "My-Name"
 
 # Define workflows to orchestrate job execution
